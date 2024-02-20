@@ -1,0 +1,38 @@
+.journal-item {
+    padding: 20px;
+    border-radius: 3px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.journal-item__title {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 28px;
+}
+
+.journal-item__body {
+    display: flex;
+    gap: 10px;
+}
+
+.journal-item__date {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: rgba(255, 255, 255, 0.40);
+}
+
+.journal-item__text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: rgba(255, 255, 255, 0.60);
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+}
