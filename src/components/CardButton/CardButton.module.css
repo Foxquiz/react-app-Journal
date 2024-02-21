@@ -1,4 +1,4 @@
-.card-button {
+.cardButton {
     display: block;
     text-align: start;
     padding: 20px;
@@ -9,6 +9,6 @@
     cursor: pointer;
 }
 
-.card-button:hover {
+.cardButton:hover {
     background: rgba(255, 255, 255, 0.10);
 }

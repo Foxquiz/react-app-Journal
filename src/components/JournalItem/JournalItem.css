@@ -34,5 +34,5 @@
     line-height: normal;
     color: rgba(255, 255, 255, 0.60);
     overflow: hidden;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
 }
