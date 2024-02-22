@@ -1,0 +1,30 @@
+.input {
+    width: 100%;
+    border: none;
+    background: none;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 28px;
+    color: #FFF;
+    border-bottom: 1px solid #5f5f5f;
+    transition: background .5s ease-in-out;
+}
+
+.journal-form__title {
+    align-self: flex-start;
+    border: none;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: #FFF;
+    font-family: "Source Sans 3", sans-serif;
+    background: none;
+    border-bottom: 1px solid #5f5f5f;
+}
+
+.invalid {
+    border: 1px solid red;
+    background: rgb(68, 13, 13);
+}

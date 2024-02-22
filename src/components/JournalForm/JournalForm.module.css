@@ -22,19 +22,6 @@
     border: 1px solid #5f5f5f;
 }
 
-.journal-form__title {
-    align-self: flex-start;
-    border: none;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    color: #FFF;
-    font-family: "Source Sans 3", sans-serif;
-    background: none;
-    border-bottom: 1px solid #5f5f5f;
-}
-
 .journal-form__date-row {
     position: relative;
     display: flex;
