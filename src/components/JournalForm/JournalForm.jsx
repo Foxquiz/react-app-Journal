@@ -1,16 +1,30 @@
 import styles from './JournalForm.module.css';
-import { useState } from 'react';
 import Button from '../Button/Button';
 import cn from 'classnames';
+import { useEffect, useState } from 'react';
 
+const INITIAL_STATE = {
+	title: true,
+	post: true,
+	date: true
+};
 
 function JournalForm({ onSubmit }) {
-	const [formValidateState, setFormValidateState] = useState({
-		title: true,
-		post: true,
-		date: true
-	});
+	const [formValidateState, setFormValidateState] = useState(INITIAL_STATE);
 
+	useEffect(() => {
+		let timerId;
+		if (!formValidateState.date || !formValidateState.title || !formValidateState.post) {
+			timerId = setTimeout(() => {
+				setFormValidateState(INITIAL_STATE);
+			}, 2000);
+		}
+
+		return () => clearTimeout(timerId);
+		//когда компонент исчезает, то выполняется функция ИЛИ когда снова меняется и вызывается эффект/hook
+		//убирает мерцание/повторный вызов
+
+	}, [formValidateState]);
 
 	const addJournalItem = (e) => {
 		e.preventDefault();
@@ -39,7 +53,6 @@ function JournalForm({ onSubmit }) {
 		onSubmit(formProps);
 	};
 
-
 	return (
 		<form className={styles['journal-form']} onSubmit={addJournalItem}>
 			<input type="text" name='title' className={cn(styles['input'], styles['journal-form__title'], {
@@ -55,9 +68,9 @@ function JournalForm({ onSubmit }) {
 			<label className={cn(styles['journal-form__date-row'])}>
 				<img className={styles['journal-form__img']} src="/folder.svg" alt="folder" />
 				<span className={styles['journal-form__text']}>Метки</span>
-				<input type="text" name='tag' className={cn(styles['input'])}/>
+				<input type="text" name='tag' className={cn(styles['input'])} />
 			</label>
-			<textarea name="post" id="" cols="30" rows="10" className={cn(styles['input'], styles['journal-form__textarea'],{
+			<textarea name="post" id="" cols="30" rows="10" className={cn(styles['input'], styles['journal-form__textarea'], {
 				[styles['invalid']]: !formValidateState.post
 			})}></textarea>
 			<Button text='Save' />

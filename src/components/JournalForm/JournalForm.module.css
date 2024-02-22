@@ -15,6 +15,7 @@
     line-height: 28px;
     color: #FFF;
     border-bottom: 1px solid #5f5f5f;
+    transition: background .5s ease-in-out;
 }
 
 .journal-form__textarea {
