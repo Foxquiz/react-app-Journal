@@ -1,5 +1,5 @@
-import styles from './JournalAddButton.module.css';
 import CardButton from '../CardButton/CardButton';
+import styles from './JournalAddButton.module.css';
 
 function JournalAddButton() {
 	const text = 'New memory';

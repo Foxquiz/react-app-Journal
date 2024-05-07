@@ -5,48 +5,26 @@ import Body from './layouts/Body/Body';
 import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 import JournalList from './components/JournalList/JournalList';
 import JournalForm from './components/JournalForm/JournalForm';
-import { useEffect, useState } from 'react';
+import { useLocalStorage } from './hooks/use-localstorage.hook';
 
-// const INITIAL_DATA = [
-// {
-// 	"id": 1,
-// 	"title": "Preparation for courses updating",
-// 	"text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dignissim tortor tortor, eget porta risus molestie nec.",
-// 	"date": "2022/02/24"
-// },
-// {
-// 	"id": 2,
-// 	"title": "Summer trip",
-// 	"text": "Aliquam accumsan nulla lectus, eu venenatis metus tempus et. Donec id mauris ultrices, imperdiet libero eu, posuere massa. Suspendisse in arcu eu ex rhoncus commodo id eu libero. ",
-// 	"date": "2022/02/24"
-// }
-// ];
+function mapItems(items) {
+	if (!items) return [];
+	console.log(items);
+	return items.map(i => ({
+		...i,
+		date: new Date(i.date)
+	}));
+}
 
 function App() {
-	const [items, setItems] = useState([]);
-
-	useEffect(() => {
-		const data = JSON.parse(localStorage.getItem('data'));
-		if (data) {
-			setItems(data.map(item => ({
-				...item,
-				date: new Date(item.date)
-			})));
-		}
-	}, []); //пустой массив, поэтому действие производится один раз, не уходит в ререндер
-
-	useEffect(() => {
-		if (items.length) { //проверки внутри эффекта, эффект/hook всегда на "верхнем уровне"
-			localStorage.setItem('data', JSON.stringify(items));
-		}
-	}, [items]); //отслеживаем изменение items, выполнение эффекта производится при изменении
+	const [items, setItems] = useLocalStorage('data');
 
 	const addItem = item => {
-		setItems(oldItems => [...oldItems, {
+		setItems([...mapItems(items), {
 			post: item.post,
 			title: item.title,
 			date: new Date(item.date),
-			id: oldItems.length > 0 ? Math.max(...oldItems.map(i => i.id)) + 1 : 1
+			id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
 		}]);
 	};
 
@@ -55,7 +33,7 @@ function App() {
 			<LeftPanel>
 				<Header />
 				<JournalAddButton />
-				<JournalList items={items} />
+				<JournalList items={mapItems(items)} />
 			</LeftPanel>
 			<Body>
 				<JournalForm onSubmit={addItem} />
