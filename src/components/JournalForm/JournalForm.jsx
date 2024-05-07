@@ -29,8 +29,8 @@ function JournalForm({ onSubmit }) {
 	useEffect(() => {
 		let timerId;
 		if (!isValid.date || !isValid.title || !isValid.post) {
+			focusError(isValid);
 			timerId = setTimeout(() => {
-				focusError(isValid);
 				dispatchForm({ type: 'RESET_VALIDITY' });
 			}, 2000);
 		}
@@ -63,7 +63,7 @@ function JournalForm({ onSubmit }) {
 			<label className={cn(styles['journal-form__date-row'])}>
 				<img className={styles['journal-form__img']} src="/calendar.svg" alt="calendar" />
 				<span className={styles['journal-form__text']}>Дата</span>
-				<Input type="date" ref={dateRef} onChange={onChange} value={values.data} name='date' isValid={isValid.date}/>
+				<Input type="date" ref={dateRef} onChange={onChange} value={values.date} name='date' isValid={isValid.date}/>
 			</label>
 			<label className={cn(styles['journal-form__date-row'])}>
 				<img className={styles['journal-form__img']} src="/folder.svg" alt="folder" />
