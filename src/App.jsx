@@ -6,6 +6,7 @@ import JournalAddButton from './components/JournalAddButton/JournalAddButton';
 import JournalList from './components/JournalList/JournalList';
 import JournalForm from './components/JournalForm/JournalForm';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
+import { UserContextProvider } from './context/user.context';
 
 function mapItems(items) {
 	if (!items) return [];
@@ -24,21 +25,24 @@ function App() {
 			post: item.post,
 			title: item.title,
 			date: new Date(item.date),
-			id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
+			id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
+			userId: item.userId
 		}]);
 	};
 
 	return (
-		<div className='app'>
-			<LeftPanel>
-				<Header />
-				<JournalAddButton />
-				<JournalList items={mapItems(items)} />
-			</LeftPanel>
-			<Body>
-				<JournalForm onSubmit={addItem} />
-			</Body>
-		</div>
+		<UserContextProvider>
+			<div className='app'>
+				<LeftPanel>
+					<Header />
+					<JournalAddButton />
+					<JournalList items={mapItems(items)} />
+				</LeftPanel>
+				<Body>
+					<JournalForm onSubmit={addItem} />
+				</Body>
+			</div>
+		</UserContextProvider>
 	);
 }
 
