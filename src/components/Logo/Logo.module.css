@@ -1,0 +1,6 @@
+.logo {
+    min-height: 25px;
+    max-height: 75px;
+    /* width: 180px; */
+    width: fit-content;
+}

@@ -6,7 +6,7 @@ import { UserContext } from '../../context/user.context';
 
 function JournalList({ items }) {
 	const {userId} = useContext(UserContext);
-	console.log(userId);
+	
 	const sortItems = (a, b) => {
 		if (a.date < b.date) return 1;
 		return -1;
