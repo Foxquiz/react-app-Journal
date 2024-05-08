@@ -7,11 +7,11 @@ import JournalList from './components/JournalList/JournalList';
 import JournalForm from './components/JournalForm/JournalForm';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 import { UserContextProvider } from './context/user.context';
+import { useState } from 'react';
 
 function mapItems(items) {
 	if (!items) return [];
-	console.log(items);
-	return items.map(i => ({
+	return items.map((i) => ({
 		...i,
 		date: new Date(i.date)
 	}));
@@ -19,15 +19,32 @@ function mapItems(items) {
 
 function App() {
 	const [items, setItems] = useLocalStorage('data');
+	const [selectedItem, setSelectedItem] = useState(null);
 
 	const addItem = item => {
-		setItems([...mapItems(items), {
-			post: item.post,
-			title: item.title,
-			date: new Date(item.date),
-			id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
-			userId: item.userId
-		}]);
+		if (!item.id) {
+			setItems([...mapItems(items), {
+				post: item.post,
+				title: item.title,
+				date: new Date(item.date),
+				id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
+				userId: item.userId
+			}]);
+		} else {
+			setItems([...mapItems(items).map(i=> {
+				if (i.id === item.id) {
+					return {
+						...item
+					};
+				}
+				return i;
+			})]);
+		}
+		
+	};
+
+	const deleteItem = (id) => {
+		setItems(items.filter(i => i.id !== id));
 	};
 
 	return (
@@ -35,11 +52,11 @@ function App() {
 			<div className='app'>
 				<LeftPanel>
 					<Header />
-					<JournalAddButton />
-					<JournalList items={mapItems(items)} />
+					<JournalAddButton cleanForm={() => setSelectedItem(null)}/>
+					<JournalList items={mapItems(items)} setItem={setSelectedItem} />
 				</LeftPanel>
 				<Body>
-					<JournalForm onSubmit={addItem} />
+					<JournalForm onSubmit={addItem} currentItem={selectedItem} onDelete={deleteItem}/>
 				</Body>
 			</div>
 		</UserContextProvider>

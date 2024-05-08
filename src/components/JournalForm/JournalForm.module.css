@@ -22,25 +22,28 @@
     border: 1px solid #5f5f5f;
 }
 
-.journal-form__date-row {
+.journal-form__row {
     position: relative;
     display: flex;
     align-items: center;
 }
 
-.journal-form__date-row::after {
-    /* content: ''; */
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -15px;
-    height: 1px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.10);
-}
-
 .journal-form__img {
     margin-right: 20px;
+}
+
+.journal-form__delete {
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: 50%;
+    font-size: 0;
+    transition: background 0.3ms ease-in-out;
+    cursor: pointer;
+}
+
+.journal-form__delete:hover {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .journal-form__text {
