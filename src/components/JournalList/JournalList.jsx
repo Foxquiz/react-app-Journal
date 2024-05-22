@@ -19,7 +19,7 @@ function JournalList({ items, setItem }) {
 		return (
 			<div className='journal-list'>
 				{items
-					.filter(el=>el.userId ===userId)
+					.filter(el=>el.userId === userId)
 					.sort(sortItems)
 					.map(el => (
 						<CardButton key={el.id} onClick={() => setItem(el)}>
@@ -27,6 +27,7 @@ function JournalList({ items, setItem }) {
 								title={el.title}
 								post={el.post}
 								date={el.date}
+								tag={el.tag}
 							/>
 						</CardButton>
 					))}

@@ -36,3 +36,18 @@
     overflow: hidden;
     -webkit-line-clamp: 1;
 }
+
+.journal-item__tag {
+    display: inline-block;
+    position: relative;
+    margin-top: 0;
+}
+
+.journal-item__tag::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 10%;
+    background-color: rgba(255, 255, 255, 0.30);
+    z-index: -1;
+}
