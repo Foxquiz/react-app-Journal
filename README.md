@@ -12,3 +12,5 @@
   <li>edit post</li>
   <li>switch logo (picture)</li>
 </ul>
+<h3>Start:</h3>
+npm run dev
