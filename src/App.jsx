@@ -21,13 +21,21 @@ function App() {
 	const [items, setItems] = useLocalStorage('data');
 	const [selectedItem, setSelectedItem] = useState(null);
 
+	const createId = (items) => {
+		console.log(items);
+		if (items === undefined) {
+			return 1;
+		}
+		return items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1
+	}
+
 	const addItem = item => {
 		if (!item.id) {
 			setItems([...mapItems(items), {
 				post: item.post,
 				title: item.title,
 				date: new Date(item.date),
-				id: items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1,
+				id: createId(items),
 				userId: item.userId,
 				tag: item.tag
 			}]);
